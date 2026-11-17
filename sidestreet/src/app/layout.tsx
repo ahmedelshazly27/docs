@@ -13,7 +13,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: "side street",
     description: "Not the highway. The street outside the café.",
-    images: ["/media/hero.jpg"],
   },
 };
 

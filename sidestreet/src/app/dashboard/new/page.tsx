@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
+import { VehicleIcon } from "@/components/led/Vehicles";
 import { AREAS, DAYPARTS, DAYS, ROUTES, VEHICLES, type VehicleId } from "@/lib/data";
 import { daysInRange, emptySchedule, estimate, isoDate, kwd, saveCampaign, type Campaign, type Day } from "@/lib/campaign";
 
@@ -193,8 +193,8 @@ export default function NewCampaign() {
                     const change = (d: number) => set("vehicles", { ...c.vehicles, [v.id]: Math.max(0, Math.min(MAX[v.id], n + d)) });
                     return (
                       <div key={v.id} className={`frame grid grid-cols-[96px_1fr] gap-5 border p-4 transition-colors sm:grid-cols-[120px_1fr_auto] sm:items-center ${n > 0 ? "border-ink" : "border-line"}`} style={{ "--frame-size": n > 0 ? "14px" : "0px", "--frame-weight": "3px" } as React.CSSProperties}>
-                        <div className="relative aspect-square overflow-hidden bg-soft">
-                          <Image src={v.image} alt="" fill sizes="120px" className="object-cover" />
+                        <div className="flex aspect-square items-center justify-center bg-ink p-3 text-paper">
+                          <VehicleIcon kind={v.id} className="w-full" />
                         </div>
                         <div>
                           <div className="text-[18px] font-medium tracking-[-0.02em]">{v.name}</div>

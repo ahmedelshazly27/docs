@@ -8,7 +8,6 @@ export const VEHICLES: {
   short: string;
   screen: string;
   bestFor: string;
-  image: string;
 }[] = [
   {
     id: "truck",
@@ -16,7 +15,6 @@ export const VEHICLES: {
     short: "Truck",
     screen: "Full-side LED, both sides",
     bestFor: "Launches, events, high-impact loops",
-    image: "/media/gulf.jpg",
   },
   {
     id: "bike",
@@ -24,7 +22,6 @@ export const VEHICLES: {
     short: "Bike box",
     screen: "Rear-facing screen on the delivery box",
     bestFor: "Neighbourhood reach, food & retail",
-    image: "/media/bike.jpg",
   },
   {
     id: "car",
@@ -32,7 +29,6 @@ export const VEHICLES: {
     short: "Car top",
     screen: "Double-sided roof screen",
     bestFor: "Malls, car parks, city-wide frequency",
-    image: "/media/car.jpg",
   },
 ];
 

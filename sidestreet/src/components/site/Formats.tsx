@@ -1,85 +1,35 @@
-"use client";
+import { Vehicle } from "@/components/led/Vehicles";
+import { Reveal } from "./Reveal";
 
-import Image from "next/image";
-import { useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "motion/react";
-import { VEHICLES } from "@/lib/data";
-import { MEDIA } from "@/lib/media";
-import { Eyebrow, Reveal } from "./Reveal";
-
-const IMAGES = { truck: MEDIA.truck, bike: MEDIA.bike, car: MEDIA.car } as const;
-
-function TiltCard({ children }: { children: React.ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const x = useMotionValue(0.5);
-  const y = useMotionValue(0.5);
-  const rx = useSpring(useTransform(y, [0, 1], [7, -7]), { stiffness: 160, damping: 18 });
-  const ry = useSpring(useTransform(x, [0, 1], [-9, 9]), { stiffness: 160, damping: 18 });
-
-  return (
-    <div className="[perspective:1100px]">
-      <motion.div
-        ref={ref}
-        style={reduce ? undefined : { rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
-        onPointerMove={(e) => {
-          const r = ref.current?.getBoundingClientRect();
-          if (!r) return;
-          x.set((e.clientX - r.left) / r.width);
-          y.set((e.clientY - r.top) / r.height);
-        }}
-        onPointerLeave={() => {
-          x.set(0.5);
-          y.set(0.5);
-        }}
-        className="group will-change-transform"
-      >
-        {children}
-      </motion.div>
-    </div>
-  );
-}
+const FORMATS = [
+  { kind: "truck" as const, name: "LED trucks", note: "Full-side screens for launches and events.", ads: ["Marfa Bank", "سافر أبعد"] },
+  { kind: "bike" as const, name: "Delivery-bike boxes", note: "Neighbourhood reach, order by order.", ads: ["Qamra", "صيف قمرة"] },
+  { kind: "car" as const, name: "Car & taxi tops", note: "Frequency across malls and car parks.", ads: ["Fanar Chalets · Khairan · book tonight"] },
+];
 
 export function Formats() {
   return (
-    <section id="formats" className="bg-ink py-28 text-paper sm:py-40" aria-label="Formats">
+    <section id="formats" className="bg-ink py-28 text-paper sm:py-36" aria-label="Formats">
       <div className="mx-auto max-w-[1320px] px-4 sm:px-8">
         <Reveal>
           <p className="mb-5 text-[13px] font-medium uppercase tracking-[0.14em] text-paper/60">Formats</p>
-          <h2 className="max-w-[18ch] text-[40px] font-medium leading-[1.05] tracking-[-0.04em] sm:text-[56px]">
-            Three screens. One street-level network.
-          </h2>
+          <h2 className="max-w-[18ch] text-[40px] font-medium leading-[1.05] tracking-[-0.04em] sm:text-[56px]">Three screens. One street-level network.</h2>
         </Reveal>
-
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
-          {VEHICLES.map((v, i) => (
-            <Reveal key={v.id} delay={i * 0.1}>
-              <TiltCard>
-                <article className="frame frame-grow" style={{ "--frame-size": "20px", "--frame-weight": "3px" } as React.CSSProperties}>
-                  <div className="relative aspect-[4/5] overflow-hidden" style={{ transform: "translateZ(30px)" }}>
-                    <Image
-                      src={IMAGES[v.id]}
-                      alt={`${v.name}: ${v.screen}`}
-                      fill
-                      sizes="(min-width: 768px) 33vw, 100vw"
-                      className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.06]"
-                    />
-                  </div>
-                  <div className="flex items-end justify-between gap-4 px-1 pb-2 pt-5" style={{ transform: "translateZ(50px)" }}>
-                    <div>
-                      <h3 className="text-[24px] font-medium tracking-[-0.03em]">{v.name}</h3>
-                      <p className="mt-1 text-[15px] text-paper/60">{v.screen}</p>
-                    </div>
-                    <p className="max-w-[16ch] text-right text-[13px] leading-snug text-paper/60">{v.bestFor}</p>
-                  </div>
-                </article>
-              </TiltCard>
+        <div className="mt-20 grid items-end gap-x-10 gap-y-16 md:grid-cols-3">
+          {FORMATS.map((f, i) => (
+            <Reveal key={f.kind} delay={i * 0.08}>
+              <div className="flex h-[220px] items-end">
+                <Vehicle kind={f.kind} messages={f.ads} marquee={f.kind === "car"} className={f.kind === "bike" ? "w-[62%]" : "w-full"} />
+              </div>
+              <div className="mt-8 border-t border-paper/15 pt-5">
+                <h3 className="text-[22px] font-medium tracking-[-0.02em]">{f.name}</h3>
+                <p className="mt-1 text-[15px] text-paper/60">{f.note}</p>
+              </div>
             </Reveal>
           ))}
         </div>
+        <p className="mt-12 text-[12px] text-paper/40">Brands shown are demo creatives.</p>
       </div>
     </section>
   );
 }
-
-export { Eyebrow };

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { VEHICLES } from "@/lib/data";
 import { Eyebrow, Reveal } from "./Reveal";
+import { LedScreen } from "@/components/led/LedScreen";
 
 type Role = "advertiser" | "partner";
 
@@ -12,6 +13,7 @@ export function Waitlist() {
   const [interests, setInterests] = useState<string[]>([]);
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [error, setError] = useState("");
+  const [brand, setBrand] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -58,6 +60,16 @@ export function Waitlist() {
           <p lang="ar" dir="rtl" className="mt-6 max-w-[44ch] text-[18px] leading-relaxed text-mute">
             سجّل الحين وكن أول من يظهر في شوارع الكويت.
           </p>
+          {role === "advertiser" && (
+            <div className="mt-12 max-w-[440px]">
+              <p className="mb-3 text-[13px] uppercase tracking-[0.14em] text-mute">Your brand, on the street</p>
+              <div className="frame bg-ink p-3" style={{ "--frame-size": "16px", "--frame-weight": "2px" } as React.CSSProperties}>
+                <div className="aspect-[16/5]">
+                  <LedScreen messages={[brand.trim() || "Your brand here"]} rows={18} hold={60} ariaLabel={`Preview: ${brand.trim() || "Your brand here"}`} />
+                </div>
+              </div>
+            </div>
+          )}
         </Reveal>
 
         <Reveal delay={0.1}>
@@ -97,7 +109,7 @@ export function Waitlist() {
 
                   <div className="grid gap-5 sm:grid-cols-2">
                     <Field label="Your name" name="name" required autoComplete="name" />
-                    <Field label={role === "advertiser" ? "Brand / company" : "Company or shop"} name="company" required autoComplete="organization" />
+                    <Field label={role === "advertiser" ? "Brand / company" : "Company or shop"} name="company" required autoComplete="organization" maxLength={40} onChange={(e) => setBrand(e.target.value)} />
                     <Field label="Work email" name="email" type="email" required autoComplete="email" />
                     <Field label="Phone (optional)" name="phone" type="tel" autoComplete="tel" />
                   </div>
