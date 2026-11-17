@@ -61,7 +61,7 @@ export function Waitlist() {
             سجّل الحين وكن أول من يظهر في شوارع الكويت.
           </p>
           {role === "advertiser" && (
-            <div className="mt-12 max-w-[440px]">
+            <div className="mt-10 max-w-[440px] sm:mt-12">
               <p className="mb-3 text-[13px] uppercase tracking-[0.14em] text-mute">Your brand, on the street</p>
               <div className="frame bg-ink p-3" style={{ "--frame-size": "16px", "--frame-weight": "2px" } as React.CSSProperties}>
                 <div className="aspect-[16/5]">
@@ -97,7 +97,7 @@ export function Waitlist() {
                           role="radio"
                           aria-checked={role === id}
                           onClick={() => setRole(id)}
-                          className={`min-h-[48px] border px-4 text-left text-[15px] font-medium transition-colors ${
+                          className={`min-h-[52px] border px-3 text-left text-[14px] font-medium leading-tight sm:px-4 sm:text-[15px] transition-colors ${
                             role === id ? "border-ink bg-ink text-paper" : "border-line hover:border-ink"
                           }`}
                         >

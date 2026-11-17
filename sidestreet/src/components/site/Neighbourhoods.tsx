@@ -28,7 +28,7 @@ export function Neighbourhoods() {
           <p className="mt-6 max-w-[46ch] text-[18px] leading-relaxed text-mute">
             Our screens go where people park, eat and walk — the café rows, co-op car parks and the blocks behind the main road. Book a neighbourhood, not a pole.
           </p>
-          <div className="mt-10 h-[92px]" aria-live="polite">
+          <div className="mt-10 h-[104px] sm:h-[92px]" aria-live="polite">
             <AnimatePresence mode="wait">
               <motion.div
                 key={area.id}
@@ -36,9 +36,9 @@ export function Neighbourhoods() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.4 }}
-                className="flex items-baseline gap-4"
+                className="flex flex-wrap items-baseline gap-x-4 gap-y-1"
               >
-                <span className="text-[13px] uppercase tracking-[0.14em] text-mute">Now showing</span>
+                <span className="w-full text-[13px] uppercase tracking-[0.14em] text-mute sm:w-auto">Now showing</span>
                 <span className="text-[28px] font-medium tracking-[-0.03em]">{area.en}</span>
                 <span lang="ar" dir="rtl" className="text-[24px]">
                   {area.ar}
@@ -49,7 +49,7 @@ export function Neighbourhoods() {
         </Reveal>
 
         <ul
-          className="flex flex-wrap content-start gap-x-6 gap-y-3"
+          className="flex flex-wrap content-start gap-x-2 gap-y-1 sm:gap-x-6 sm:gap-y-3"
           onMouseLeave={() => setPaused(false)}
           aria-label="Areas we cover"
         >
@@ -63,12 +63,16 @@ export function Neighbourhoods() {
                     setPaused(true);
                     setActive(i);
                   }}
+                  onClick={() => {
+                    setPaused(true);
+                    setActive(i);
+                  }}
                   onFocus={() => {
                     setPaused(true);
                     setActive(i);
                   }}
                   aria-pressed={on}
-                  className={`frame px-3 py-2 text-[32px] font-medium tracking-[-0.035em] transition-colors duration-500 sm:text-[44px] ${
+                  className={`frame px-3 py-2 text-[28px] font-medium tracking-[-0.035em] transition-colors duration-500 sm:text-[44px] ${
                     on ? "text-ink" : "text-[#c4c4c4] hover:text-ink"
                   }`}
                   style={

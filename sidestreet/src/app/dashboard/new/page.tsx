@@ -137,16 +137,17 @@ export default function NewCampaign() {
 
         <ol className="mt-8 flex gap-1 overflow-x-auto" aria-label="Steps">
           {STEPS.map((s, i) => (
-            <li key={s} className="flex-1">
+            <li key={s} className={i === step ? "flex-[2.2] sm:flex-1" : "flex-1"}>
               <button
                 type="button"
                 onClick={() => (i < step ? go(i) : i === step + 1 ? go(i) : undefined)}
                 aria-current={i === step ? "step" : undefined}
-                className="w-full min-w-[84px] text-left"
+                className="w-full min-h-[44px] text-left sm:min-w-[84px]"
               >
                 <span className={`block h-[3px] transition-colors duration-500 ${i <= step ? "bg-ink" : "bg-line"}`} />
                 <span className={`mt-2 block text-[13px] ${i === step ? "font-medium text-ink" : "text-mute"}`}>
-                  {String(i + 1).padStart(2, "0")} {s}
+                  {String(i + 1).padStart(2, "0")}{" "}
+                  <span className={i === step ? "" : "sr-only sm:not-sr-only"}>{s}</span>
                 </span>
               </button>
             </li>
