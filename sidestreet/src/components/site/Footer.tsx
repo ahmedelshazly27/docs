@@ -22,11 +22,7 @@ export function Footer() {
         </nav>
       </div>
       <div className="mx-auto max-w-[1320px] border-t border-paper/15 px-4 py-6 text-[13px] text-paper/50 sm:px-8">
-        © {new Date().getFullYear()} side street · Kuwait ·{" "}
-        <Link href="/credits" className="underline underline-offset-4 hover:text-paper">
-          Photo credits
-        </Link>{" "}
-        · Brands shown on screens are demo creatives
+        © {new Date().getFullYear()} side street · Kuwait · Brands shown on screens are demo creatives
       </div>
     </footer>
   );

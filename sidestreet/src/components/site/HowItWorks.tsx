@@ -46,7 +46,7 @@ export function HowItWorks() {
 
         <div ref={ref} className="relative aspect-[4/5] overflow-hidden lg:sticky lg:top-24">
           <motion.div style={{ y }} className="absolute -inset-y-[12%] inset-x-0">
-            <Image src={MEDIA.bikes} alt="Delivery riders with lit screen boxes waiting at a red light in Hawalli" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+            <Image src={MEDIA.coop} alt="A Kuwaiti co-op supermarket car park in the evening" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
           </motion.div>
           <div className="absolute bottom-6 left-6 right-6 bg-paper/95 p-5 backdrop-blur-sm">
             <div className="flex items-center justify-between text-[13px] text-mute">

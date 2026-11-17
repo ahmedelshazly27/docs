@@ -16,7 +16,7 @@ export const VEHICLES: {
     short: "Truck",
     screen: "Full-side LED, both sides",
     bestFor: "Launches, events, high-impact loops",
-    image: "/media/truck.jpg",
+    image: "/media/gulf.jpg",
   },
   {
     id: "bike",

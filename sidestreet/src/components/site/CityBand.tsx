@@ -13,10 +13,10 @@ export function CityBand() {
   const inset = useTransform(scrollYProgress, [0, 0.5], reduce ? ["0%", "0%"] : ["8%", "0%"]);
 
   return (
-    <section ref={ref} className="relative h-[110vh] overflow-hidden bg-ink" aria-label="People on the street">
+    <section ref={ref} className="relative h-[110vh] overflow-hidden bg-ink" aria-label="Kuwait roads">
       <motion.div style={{ left: inset, right: inset }} className="absolute inset-y-0">
         <motion.div style={{ scale }} className="absolute inset-0">
-          <Image src={MEDIA.street} alt="People outside a café in Salmiya turning to look at a passing screen truck" fill sizes="100vw" className="object-cover" />
+          <Image src={MEDIA.gulf} alt="A side street screen truck on Arabian Gulf Road at dusk" fill sizes="100vw" className="object-cover" />
         </motion.div>
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />

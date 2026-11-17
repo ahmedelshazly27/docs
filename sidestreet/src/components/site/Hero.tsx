@@ -38,7 +38,7 @@ export function Hero() {
               playsInline
             />
           ) : (
-            <Image src={MEDIA.heroPoster} alt="A side street LED truck parked on a quiet street in Kuwait at night" fill priority sizes="100vw" className="object-cover" />
+            <Image src={MEDIA.heroPoster} alt="A side street LED truck ahead on the Fifth Ring Road at night" fill priority sizes="100vw" className="object-cover" />
           )}
           <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/10 to-ink/70" />
         </motion.div>
