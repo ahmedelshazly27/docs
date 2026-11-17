@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { Eyebrow, Reveal } from "./Reveal";
+import { Reveal } from "./Reveal";
 
 // Schematic (not to scale) of Kuwait's ring roads arcing around the city from the coast.
 const RINGS = [1, 2, 3, 4, 5, 6, 7];
