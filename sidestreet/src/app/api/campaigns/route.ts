@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase-server";
+import { supabaseServer } from "@/lib/supabase-server";
 import { AREAS, DAYPARTS, DAYS, ROUTES } from "@/lib/data";
 import { estimate, type Campaign } from "@/lib/campaign";
 
@@ -39,12 +39,14 @@ export async function POST(req: Request) {
   const est = estimate({ vehicles, startDate, endDate, schedule });
   if (est.slots === 0) return NextResponse.json({ error: "Pick at least one day and time." }, { status: 400 });
 
-  const db = supabaseAdmin();
+  const id = typeof b.id === "string" && /^[0-9a-f-]{36}$/i.test(b.id) ? b.id : crypto.randomUUID();
+  const db = supabaseServer();
   if (!db) return NextResponse.json({ error: "Saved on this device. Sending opens at launch." }, { status: 503 });
 
-  const { data, error } = await db
+  const { error } = await db
     .from("campaigns")
     .insert({
+      id,
       contact_email: email,
       name,
       objective: str(b.objective, 60) || null,
@@ -58,13 +60,11 @@ export async function POST(req: Request) {
       creative_name: str(b.creativeName, 200) || null,
       estimate_kwd: est.total,
       notes: str(b.notes, 2000) || null,
-    })
-    .select("id")
-    .single();
+    });
 
   if (error) {
     console.error("[campaigns] insert failed", error);
     return NextResponse.json({ error: "Could not send the campaign. Please try again." }, { status: 500 });
   }
-  return NextResponse.json({ ok: true, id: data.id });
+  return NextResponse.json({ ok: true, id });
 }

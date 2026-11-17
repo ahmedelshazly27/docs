@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase-server";
+import { supabaseServer } from "@/lib/supabase-server";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const str = (v: unknown, max = 200) => (typeof v === "string" ? v.trim().slice(0, max) : "");
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
   if (!name || !company) return NextResponse.json({ error: "Please add your name and company." }, { status: 400 });
   if (!EMAIL.test(email)) return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
 
-  const db = supabaseAdmin();
+  const db = supabaseServer();
   if (!db) {
     console.warn("[waitlist] Supabase is not configured; signup not stored", { role, company });
     return NextResponse.json({ error: "Sign-ups open soon. Please try again shortly." }, { status: 503 });
